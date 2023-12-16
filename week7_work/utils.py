@@ -24,12 +24,13 @@ def generate_node_image(node_indices):
 
 
 def generate_split_viz(node_indices, left_indices, right_indices, feature):
-    
+    """Render tree"""
     G=nx.DiGraph()
     
     indices_list = [node_indices, left_indices, right_indices]
+
     for idx, indices in enumerate(indices_list):
-        G.add_node(idx,image= generate_node_image(indices))
+        G.add_node(idx, image = generate_node_image(indices))
 
     G.add_edge(0,1)
     G.add_edge(0,2)
@@ -46,6 +47,7 @@ def generate_split_viz(node_indices, left_indices, right_indices, feature):
 
     feature_name = ["Brown Cap", "Tapering Stalk Shape", "Solitary"][feature]
     ax_name = ["Splitting on %s" % feature_name , "Left: %s = 1" % feature_name, "Right: %s = 0" % feature_name]
+
     for idx, n in enumerate(G):
         xx,yy=trans(pos[n]) # figure coordinates
         xa,ya=trans2((xx,yy)) # axes coordinates
